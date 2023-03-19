@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccessToken } from '../../store/features/AuthSlice';
 import { AppDispatch, RootState } from '../../store';
@@ -15,31 +15,24 @@ import { AppDispatch, RootState } from '../../store';
  */
 function Success() {
     const [searchParams] = useSearchParams();
-    const PROXY_SERVER_URI = process.env.REACT_APP_PROXY_SERVER_URI;
     const dispatch = useDispatch<AppDispatch>();
     const authState = useSelector((state: RootState) => state.auth);
-    /**
-     * this function uses 'code' to fetch an access token from github oauth through a proxy server
-     * @param code a query param fetched after the github oauth redirect
-     */
-    const getAccessTokens = async (code: String) => {
-        try {
-            const response = await fetch(`${PROXY_SERVER_URI}/getAccessToken?code=${code}`)
-            const data = await response.json()
-            localStorage.setItem("accessToken", data.access_token)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
+    const navigate = useNavigate();
     useEffect(() => {
-        //as the page mounts fetch the accessToken if not already saved
         const code = searchParams.get("code");
+        //if auth state is failed or idle we try to fetch a new accessToken
         if (code && ["failed", "idle"].includes(authState.state)) {
-            //getAccessToken(code);
             dispatch(getAccessToken(code));
         }
     }, [])
+
+    useEffect(() => {
+        const state = authState.state;
+        if (state === "succeeded")
+            return navigate("/");
+        if (state === "failed")
+            return navigate("/login");
+    }, [authState])
 
 
 
