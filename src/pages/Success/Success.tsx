@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getAccessToken } from '../../store/features/AuthSlice';
+import { AppDispatch, RootState } from '../../store';
 
 /**
  * After authorizing the application from github, we are redirected to this /success page.
@@ -14,12 +16,13 @@ import { useSearchParams } from 'react-router-dom';
 function Success() {
     const [searchParams] = useSearchParams();
     const PROXY_SERVER_URI = process.env.REACT_APP_PROXY_SERVER_URI;
-
+    const dispatch = useDispatch<AppDispatch>();
+    const authState = useSelector((state: RootState) => state.auth);
     /**
      * this function uses 'code' to fetch an access token from github oauth through a proxy server
      * @param code a query param fetched after the github oauth redirect
      */
-    const getAccessToken = async (code: String)=>{
+    const getAccessTokens = async (code: String) => {
         try {
             const response = await fetch(`${PROXY_SERVER_URI}/getAccessToken?code=${code}`)
             const data = await response.json()
@@ -29,19 +32,20 @@ function Success() {
         }
     }
 
-    useEffect( () => {
+    useEffect(() => {
         //as the page mounts fetch the accessToken if not already saved
         const code = searchParams.get("code");
-        if(code && localStorage.getItem("accessToken") === null){
-            getAccessToken(code);
+        if (code && ["failed", "idle"].includes(authState.state)) {
+            //getAccessToken(code);
+            dispatch(getAccessToken(code));
         }
     }, [])
-    
 
 
-  return (
-    <div>LogIn in progress, Please wait</div>
-  )
+
+    return (
+        <div>LogIn in progress, Please wait</div>
+    )
 }
 
 export default Success
