@@ -1,11 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { useSearchRepoByUser, useUserInfo } from '../../querries/RepoQuerries';
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useEnforceUrlParams } from './hooks';
 import TextInput from '../../components/TextInput';
 import { buildQueryString } from './utility';
 import RepositoryItem from '../../components/RepositoryItem';
 import UserInfoItem from '../../components/UserInfoItem';
+import { useUserInfo } from '../../services/UserService';
+import { useSearchRepoByUser } from '../../services/RepositoryService';
 
 function Repositories() {
     const user = useEnforceUrlParams()

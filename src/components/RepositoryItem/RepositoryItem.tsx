@@ -1,5 +1,5 @@
 import React from 'react'
-import { RepositoryInfo } from '../../querries/RepoQuerries'
+import { RepositoryInfo } from '../../services/RepositoryService'
 import StarIcon from './StarIcon'
 
 interface RepositoryItemProps {
@@ -24,12 +24,6 @@ function RepositoryItem({ repository: { name, pushedAt, primaryLanguage, isStarr
                 <div className="font-normal text-gray-700 dark:text-gray-400">{pushedAt?.toISOString()}</div>
             </div>
         </div>
-
-        // <div>
-        //     <div>{repository.name}</div>
-        //     {repository.pushedAt && <div>{repository.pushedAt.toISOString()}</div>}
-        //     {repository.primaryLanguage && <div>{repository.primaryLanguage}</div>}
-        // </div>
     )
 }
 

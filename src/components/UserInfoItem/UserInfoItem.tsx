@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserInfo } from '../../querries/RepoQuerries'
+import { UserInfo } from '../../services/UserService'
 
 interface UserInfoItemProps {
     user: UserInfo,
