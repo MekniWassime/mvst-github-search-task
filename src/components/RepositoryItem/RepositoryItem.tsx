@@ -1,6 +1,7 @@
 import React from 'react'
 import { RepositoryInfo } from '../../services/RepositoryService'
 import StarIcon from './StarIcon'
+import { humanReadableDuration } from './utility'
 
 interface RepositoryItemProps {
     repository: RepositoryInfo,
@@ -21,7 +22,7 @@ function RepositoryItem({ repository: { name, pushedAt, primaryLanguage, isStarr
                     <span className="w-2 h-2 mr-1 bg-blue-500 rounded-full"></span>
                     {primaryLanguage}
                 </span>
-                <div className="font-normal text-gray-700 dark:text-gray-400">{pushedAt?.toISOString()}</div>
+                <div className="font-normal text-gray-700 dark:text-gray-400">{pushedAt ? `updated ${humanReadableDuration(pushedAt)}` : ""}</div>
             </div>
         </div>
     )

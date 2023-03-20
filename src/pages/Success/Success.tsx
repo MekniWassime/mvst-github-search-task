@@ -37,7 +37,24 @@ function Success() {
     }, [authState])
 
     return (
-        <div>LogIn in progress, Please wait</div>
+        <div className='flex justify-center py-40'>
+            <div className='max-w-2xl text-center'>
+                <p className="text-5xl text-gray-900 dark:text-gray-100">
+                    Logging You In Please Wait!</p>
+                <p className="mt-6 text-base text-gray-600 dark:text-gray-400">
+                    If you are able to read this it means that this is taking too long
+                </p>
+                <p className="mt-3 text-base text-gray-600 dark:text-gray-400">
+                    This is because authentication goes through a proxy server deployed for free on render, they stop inactive free servers and start them automatically if a request is made
+                </p>
+                <p className="mt-3 text-base text-gray-600 dark:text-gray-400">
+                    Takes about 30 seconds, after that subsequent requests are instantanious since the server is up
+                </p>
+                <p className="mt-3 text-base text-gray-600 dark:text-gray-400">
+                    If you want to test normal performance logout and back in after this finishes and it won't take long at all
+                </p>
+            </div>
+        </div>
     )
 }
 

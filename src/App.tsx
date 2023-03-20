@@ -12,6 +12,7 @@ import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import AuthGuard from './guards/AuthGuard';
 import DarkModeWrapper from './components/DarkModeWrapper';
+import NavBar from './layouts/NavBar';
 
 function App() {
   let persistor = persistStore(store)
@@ -20,6 +21,7 @@ function App() {
       <PersistGate persistor={persistor}>
         <BrowserRouter>
           <DarkModeWrapper>
+            <NavBar />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<LogIn />} />
