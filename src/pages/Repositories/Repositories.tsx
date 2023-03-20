@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import NavBar from '../../layouts/NavBar'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useEnforceUrlParams } from './hooks';
 import TextInput from '../../components/TextInput';
@@ -33,9 +34,9 @@ function Repositories() {
                 {/* TODO: add user info loading */}
                 {userInfo && <UserInfoItem user={userInfo} />}
             </div>
-            <div className='flex-grow p-6 md:pl-8 md:pt-16'>
+            <div className='flex-grow p-6 md:pl-8 md:pt-7'>
                 <FormProvider {...methods}>
-                    <TextInput name="searchString" submit={submit} />
+                    <TextInput name="searchString" label="Search" submit={submit} />
                 </FormProvider>
                 <div className='pt-5'>
                     {loading ? <div>Loading</div> : renderList()}

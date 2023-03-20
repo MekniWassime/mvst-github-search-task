@@ -1,6 +1,7 @@
 import React from 'react'
 import { RepositoryInfo } from '../../services/RepositoryService'
 import StarIcon from './StarIcon'
+import { humanReadableDuration } from './utility'
 
 interface RepositoryItemProps {
     repository: RepositoryInfo,
@@ -13,7 +14,7 @@ function RepositoryItem({ repository: { name, pushedAt, primaryLanguage, isStarr
             <div className='flex flex-row justify-between'>
                 <a href={url} target="_blank" className="font-mono mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white hover:underline cursor-pointer" rel="noreferrer" >{name}</a>
                 <div className='flex flex-row items-center flex-shrink-0'>
-                    <StarIcon isStarred={isStarred} /><div className='ml-1 pb-0.5 text-2xl'>{stars}</div>
+                    <StarIcon isStarred={isStarred} /><div className='ml-1 text-gray-900 dark:text-gray-400 pb-0.5 text-2xl'>{stars}</div>
                 </div>
             </div>
             <div className='flex flex-row justify-between pt-4'>
@@ -21,7 +22,7 @@ function RepositoryItem({ repository: { name, pushedAt, primaryLanguage, isStarr
                     <span className="w-2 h-2 mr-1 bg-blue-500 rounded-full"></span>
                     {primaryLanguage}
                 </span>
-                <div className="font-normal text-gray-700 dark:text-gray-400">{pushedAt?.toISOString()}</div>
+                <div className="font-normal text-gray-700 dark:text-gray-400">{pushedAt ? `updated ${humanReadableDuration(pushedAt)}` : ""}</div>
             </div>
         </div>
     )

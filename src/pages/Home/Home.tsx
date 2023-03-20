@@ -1,35 +1,24 @@
-import { gql, useQuery } from '@apollo/client';
-import React, { useMemo } from 'react'
-import { useDispatch } from 'react-redux'
-import { logout } from '../../store/features/AuthSlice';
-
-const FEED_QUERY = gql`{ 
-    search (type: REPOSITORY, query: "big user:MekniWassime", first:50) {
-      edges {
-        node {
-          ... on Repository {
-            name
-          }
-        }
-      }
-    }
-  }`
-
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router';
+import { RootState } from '../../store';
+/**
+ * This Component surves only to redirect `/` to `/login` if not logged in
+ * And `/` to `/repo` if the user is logged in
+ */
 function Home() {
-    //const { data, loading, error, called, networkStatus, } = useQuery(FEED_QUERY);
+    const navigate = useNavigate()
+    const authState = useSelector((state: RootState) => state.auth)
+    useEffect(() => {
+        if (authState.state === "succeeded")
+            navigate(`/repos/${authState.login}`)
+        else
+            navigate("/login")
+    }, [])
 
-    // useMemo(() => console.log(data), [data]);
-    // useMemo(() => console.log(loading), [loading]);
-    // useMemo(() => console.log(error), [error]);
-    // useMemo(() => console.log(called), [called]);
-    // useMemo(() => console.log(networkStatus), [networkStatus]);
 
-    const dispatch = useDispatch();
     return (
-        <>
-            <div>Home</div>
-            <button onClick={() => dispatch(logout())}>logout</button>
-        </>
+        <></>
     )
 }
 
