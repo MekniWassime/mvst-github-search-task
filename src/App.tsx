@@ -22,7 +22,7 @@ function App() {
             <Route path="/login" element={<LogIn />} />
             <Route path="/success" element={<Success />} />
             <Route
-              path="/repos/:user"
+              path="/repos/:user?"
               element={<Repositories />}
             ></Route>
             <Route path='*' element={<PageNotFound />}></Route>
