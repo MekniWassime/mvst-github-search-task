@@ -13,7 +13,7 @@ function RepositoryItem({ repository: { name, pushedAt, primaryLanguage, isStarr
             <div className='flex flex-row justify-between'>
                 <a href={url} target="_blank" className="font-mono mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white hover:underline cursor-pointer" rel="noreferrer" >{name}</a>
                 <div className='flex flex-row items-center flex-shrink-0'>
-                    <StarIcon isStarred={isStarred} /><div className='ml-1 pb-0.5 text-2xl'>{stars}</div>
+                    <StarIcon isStarred={isStarred} /><div className='ml-1 text-gray-900 dark:text-gray-400 pb-0.5 text-2xl'>{stars}</div>
                 </div>
             </div>
             <div className='flex flex-row justify-between pt-4'>

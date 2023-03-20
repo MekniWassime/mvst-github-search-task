@@ -10,6 +10,8 @@ import { Provider } from "react-redux"
 import { store } from './store';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
+import AuthGuard from './guards/AuthGuard';
+import DarkModeWrapper from './components/DarkModeWrapper';
 
 function App() {
   let persistor = persistStore(store)
@@ -17,16 +19,18 @@ function App() {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/success" element={<Success />} />
-            <Route
-              path="/repos/:user?"
-              element={<Repositories />}
-            ></Route>
-            <Route path='*' element={<PageNotFound />}></Route>
-          </Routes>
+          <DarkModeWrapper>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/success" element={<Success />} />
+              <Route
+                path="/repos/:user?"
+                element={<AuthGuard><Repositories /></AuthGuard>}
+              ></Route>
+              <Route path='*' element={<PageNotFound />}></Route>
+            </Routes>
+          </DarkModeWrapper>
         </BrowserRouter>
       </PersistGate>
     </Provider>

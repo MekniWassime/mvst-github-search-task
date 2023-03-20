@@ -11,18 +11,28 @@ import {
 } from 'redux-persist'
 
 import storage from 'redux-persist/lib/storage'
+import { AppSettingsSlice } from './features/AppSettingsSlice';
 
-const persistConfig = {
-    key: 'root',
+const authPersistConfig = {
+    key: 'auth',
     version: 1,
     storage,
 }
 
-const authPersistedReducer = persistReducer(persistConfig, AuthSlice.reducer)
+
+const appSettingsPersistConfig = {
+    key: 'appSettings',
+    version: 1,
+    storage,
+}
+
+const authPersistedReducer = persistReducer(authPersistConfig, AuthSlice.reducer);
+const appSettingsPersistedReducer = persistReducer(appSettingsPersistConfig, AppSettingsSlice.reducer);
 
 export const store = configureStore({
     reducer: {
-        auth: authPersistedReducer
+        auth: authPersistedReducer,
+        appSettings: appSettingsPersistedReducer,
     },
     devTools: true,
     middleware: (getDefaultMiddleware) =>
