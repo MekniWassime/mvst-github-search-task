@@ -14,6 +14,9 @@ query searchRepoByUser($queryString: String!) {
               id
               name
             }
+            url
+            viewerHasStarred
+            stargazerCount
           }
         }
       }
@@ -25,7 +28,10 @@ export interface RepositoryInfo {
     id: string,
     name: string,
     pushedAt?: Date,
-    primaryLanguage?: string;
+    primaryLanguage?: string,
+    url: string,
+    isStarred: boolean,
+    stars: number
 }
 
 export const useSearchRepoByUser = (queryString: string): { data: RepositoryInfo[], loading: boolean } => {
@@ -36,7 +42,10 @@ export const useSearchRepoByUser = (queryString: string): { data: RepositoryInfo
         id: node.id,
         name: node.name,
         pushedAt: node.pushedAt ? new Date(node.pushedAt) : undefined,
-        primaryLanguage: node.primaryLanguage?.name
+        primaryLanguage: node.primaryLanguage?.name,
+        url: node.url,
+        isStarred: node.viewerHasStarred,
+        stars: node.stargazerCount
     } as RepositoryInfo))
 
     return { data: repositories, loading };
@@ -59,7 +68,7 @@ query searchForUser($queryString: String!) {
 
 export interface UserInfo {
     login: string,
-    name: string,
+    name?: string,
     avatarUrl: string
 }
 
