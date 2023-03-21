@@ -31,8 +31,7 @@ function Repositories() {
     return (
         <div className='flex flex-col md:flex-row'>
             <div className='px-6 py-3 md:pt-10 flex-none shadow-md md:min-h-screen'>
-                {/* TODO: add user info loading */}
-                {userInfo && <UserInfoItem user={userInfo} />}
+                <UserInfoItem user={userInfo} />
             </div>
             <div className='flex-grow p-6 md:pl-8 md:pt-7'>
                 <FormProvider {...methods}>
