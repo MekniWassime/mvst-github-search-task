@@ -19,7 +19,7 @@ export default {
             const methods = useForm();
             return <FormProvider {...methods}>
                 <Story args={{ label: "Search input", name: "search", submit: () => { setSubmitCounter(submitCounter + 1) } }} />
-                <p>Input automatically submitted <span data-testid="counter">{submitCounter}</span> times</p>
+                <p>Input automatically submitted <span data-testid="counter">{submitCounter}</span> time(s)</p>
             </FormProvider>
         }
     ]
