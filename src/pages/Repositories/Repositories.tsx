@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import NavBar from '../../layouts/NavBar'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useEnforceUrlParams } from './hooks';
 import TextInput from '../../components/TextInput';
@@ -8,6 +7,7 @@ import RepositoryItem from '../../components/RepositoryItem';
 import UserInfoItem from '../../components/UserInfoItem';
 import { useUserInfo } from '../../services/UserService';
 import { useSearchRepoByUser } from '../../services/RepositoryService';
+import RepositoryLoadingPlaceholder from '../../components/RepositoryLoadingPlaceholder';
 
 function Repositories() {
     const user = useEnforceUrlParams()
@@ -24,8 +24,13 @@ function Repositories() {
 
     const { data, loading } = useSearchRepoByUser(query);
 
-    const renderList = () => {
-        return data.map((repository) => (<RepositoryItem key={repository.id} repository={repository} />))
+    const renderRepositoryList = () => {
+        if (loading)
+            return RepositoryLoadingPlaceholder({ itemCount: 7 });
+        else if (data.length === 0)
+            return <p className="mt-10 text-center text-3xl text-gray-900 dark:text-white">No Repositories found that match your search</p>
+        else
+            return data.map((repository) => (<RepositoryItem key={repository.id} repository={repository} />))
     }
 
     return (
@@ -38,7 +43,7 @@ function Repositories() {
                     <TextInput name="searchString" label="Search" submit={submit} />
                 </FormProvider>
                 <div className='pt-5'>
-                    {loading ? <div>Loading</div> : renderList()}
+                    {renderRepositoryList()}
                 </div>
             </div>
         </div>
