@@ -1,5 +1,5 @@
 import React from 'react'
-import { RepositoryInfo } from '../../services/RepositoryService'
+import { RepositoryInfo } from '../../services/RepositoryService/RepositoryService'
 import StarIcon from './StarIcon'
 import { humanReadableDuration } from './utility'
 
@@ -19,7 +19,7 @@ function RepositoryItem({ repository: { name, pushedAt, primaryLanguage, isStarr
     }
 
     return (
-        <div className="block mb-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="block mb-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" data-testid="repositoryItem">
             <div className='flex flex-row justify-between'>
                 <a href={url} target="_blank" className="font-mono mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white hover:underline cursor-pointer" rel="noreferrer" >{name}</a>
                 <div className='flex flex-row items-center flex-shrink-0'>

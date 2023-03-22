@@ -12,13 +12,13 @@ function RepositoryLoadingPlaceholder({ itemCount = 10 }: RepositoryLoadingPlace
   const renderItems = () => {
     const items = []
     for (let i = 0; i < itemCount; i++) {
-      items.push(<div className="block h-32 mb-4 p-6 bg-gray-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"></div>)
+      items.push(<div key={i} className="block h-32 mb-4 p-6 bg-gray-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"></div>)
     }
     return items;
   }
 
   return (
-    <div className='duration-300 animate-pulse'>
+    <div className='duration-300 animate-pulse' data-testid="repositoriesLoading">
       {renderItems()}
     </div>
   )

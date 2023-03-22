@@ -33,8 +33,9 @@ export const Primary = Template.bind({});
 export const AutomaticSubmitInteraction = Template.bind({});
 
 AutomaticSubmitInteraction.play = async ({ canvasElement }) => {
+    //  Arrange
     const canvas = within(canvasElement);
-
+    //  Act
     const input = await canvas.getByPlaceholderText("Search input")
     await userEvent.click(input)
     await userEvent.keyboard("will submit one time automatically", { delay: 100 })
@@ -43,6 +44,7 @@ AutomaticSubmitInteraction.play = async ({ canvasElement }) => {
     await new Promise(resolve => setTimeout(resolve, 400));
     //this counter is not part of the component but rather a decorator defined in this story's configuration
     const counter = await canvas.getByTestId("counter");
+    //  Assert
     //The input should have automatically submitted exactly one time
     expect(counter.innerText).toContain("1")
 

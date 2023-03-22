@@ -6,7 +6,7 @@ import { buildQueryString } from './utility';
 import RepositoryItem from '../../components/RepositoryItem';
 import UserInfoItem from '../../components/UserInfoItem';
 import { useUserInfo } from '../../services/UserService';
-import { useSearchRepoByUser } from '../../services/RepositoryService';
+import { useSearchRepoByUser } from '../../services/RepositoryService/RepositoryService';
 import RepositoryLoadingPlaceholder from '../../components/RepositoryLoadingPlaceholder';
 
 function Repositories() {
@@ -18,7 +18,7 @@ function Repositories() {
 
     const submit = () => {
         const newQuery = buildQueryString(
-            watch('searchString'), user, undefined, "<10");
+            watch('searchString'), user, undefined, undefined);
         setQuery(newQuery);
     }
 
@@ -28,7 +28,7 @@ function Repositories() {
         if (loading)
             return RepositoryLoadingPlaceholder({ itemCount: 7 });
         else if (data.length === 0)
-            return <p className="mt-10 text-center text-3xl text-gray-900 dark:text-white">No Repositories found that match your search</p>
+            return <p className="mt-10 text-center text-3xl text-gray-900 dark:text-white" data-testid="noRepositoriesFound">No Repositories found that match your search</p>
         else
             return data.map((repository) => (<RepositoryItem key={repository.id} repository={repository} />))
     }
