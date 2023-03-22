@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import NavBar from '../../layouts/NavBar'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useEnforceUrlParams } from './hooks';
 import TextInput from '../../components/TextInput';
@@ -8,6 +7,7 @@ import RepositoryItem from '../../components/RepositoryItem';
 import UserInfoItem from '../../components/UserInfoItem';
 import { useUserInfo } from '../../services/UserService';
 import { useSearchRepoByUser } from '../../services/RepositoryService';
+import RepositoryLoadingPlaceholder from '../../components/RepositoryLoadingPlaceholder';
 
 function Repositories() {
     const user = useEnforceUrlParams()
@@ -18,28 +18,32 @@ function Repositories() {
 
     const submit = () => {
         const newQuery = buildQueryString(
-            watch('searchString'), user, undefined, "<10");
+            watch('searchString'), user, undefined, undefined);
         setQuery(newQuery);
     }
 
     const { data, loading } = useSearchRepoByUser(query);
 
-    const renderList = () => {
-        return data.map((repository) => (<RepositoryItem key={repository.id} repository={repository} />))
+    const renderRepositoryList = () => {
+        if (loading)
+            return RepositoryLoadingPlaceholder({ itemCount: 7 });
+        else if (data.length === 0)
+            return <p className="mt-10 text-center text-3xl text-gray-900 dark:text-white" data-testid="noRepositoriesFound">No Repositories found that match your search</p>
+        else
+            return data.map((repository) => (<RepositoryItem key={repository.id} repository={repository} />))
     }
 
     return (
         <div className='flex flex-col md:flex-row'>
             <div className='px-6 py-3 md:pt-10 flex-none shadow-md md:min-h-screen'>
-                {/* TODO: add user info loading */}
-                {userInfo && <UserInfoItem user={userInfo} />}
+                <UserInfoItem user={userInfo} />
             </div>
             <div className='flex-grow p-6 md:pl-8 md:pt-7'>
                 <FormProvider {...methods}>
                     <TextInput name="searchString" label="Search" submit={submit} />
                 </FormProvider>
                 <div className='pt-5'>
-                    {loading ? <div>Loading</div> : renderList()}
+                    {renderRepositoryList()}
                 </div>
             </div>
         </div>

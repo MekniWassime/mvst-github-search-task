@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { FieldValues, UseFormWatch } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { RootState } from "../../store";
@@ -29,11 +28,5 @@ export const useEnforceUrlParams = (): string => {
     //null check operator used here because we only use this hook when the user is logged in
     //and current user always not null in that case
     return user ? user : currentUser!;
-}
-
-export const useTriggerSubmit = (submit: () => void, watch: UseFormWatch<FieldValues>) => {
-    useEffect(() => {
-        console.log("valueChanged");
-    }, [watch('searchString')])
 }
 
