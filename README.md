@@ -31,6 +31,7 @@ To run the unit and integration test suits use `npm test`
 
 - biggest one is implementing advanced search features (filter by programming language, stars, forks etc), the mechanisme for constructing these queries are implemented but i didn't get to implement their UI
 - making it so that you can run storybook with one command, it might be a webpack thing or maybe versions are missmached but to figure it out i need time
+- use proper hosting services with CLIs that would allow me two write proper CI/CD pipelines that run tests, build and deploy etc
 - spend more time on making sure errors are handled properly
 - expand repository from list to view more information
 - allow the user to Star repositories
