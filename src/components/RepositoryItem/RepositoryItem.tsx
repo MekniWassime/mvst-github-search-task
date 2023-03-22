@@ -1,5 +1,5 @@
 import React from 'react'
-import { RepositoryInfo } from '../../services/RepositoryService/RepositoryService'
+import { RepositoryInfo } from '../../services/RepositoryService'
 import StarIcon from './StarIcon'
 import { humanReadableDuration } from './utility'
 

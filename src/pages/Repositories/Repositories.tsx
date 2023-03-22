@@ -6,7 +6,7 @@ import { buildQueryString } from './utility';
 import RepositoryItem from '../../components/RepositoryItem';
 import UserInfoItem from '../../components/UserInfoItem';
 import { useUserInfo } from '../../services/UserService';
-import { useSearchRepoByUser } from '../../services/RepositoryService/RepositoryService';
+import { useSearchRepoByUser } from '../../services/RepositoryService';
 import RepositoryLoadingPlaceholder from '../../components/RepositoryLoadingPlaceholder';
 
 function Repositories() {

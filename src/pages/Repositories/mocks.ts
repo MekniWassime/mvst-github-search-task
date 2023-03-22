@@ -1,5 +1,5 @@
 import { MockedResponse } from "@apollo/react-testing";
-import { searchRepoByUser } from "../../services/RepositoryService/RepositoryService";
+import { searchRepoByUser } from "../../services/RepositoryService";
 import { getUserInfoQuery } from "../../services/UserService";
 
 export const mockedApolloClientResponses: MockedResponse[] = [
