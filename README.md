@@ -11,6 +11,8 @@ The app is deployed here [https://mvst-repository-search-task.onrender.com](http
 
 (PS: i m going to send this as a zip file but if you would like to view it on github send me an email on mekni.wassime@gmail.com and i will invite you to the private repo)
 
+Also if the app takes a long time to login that's because it goes through a proxy server hosted for free that gets shutdown for inactivity, please hang tight as it will automatically start but it might take about 30 seconds, only login goes through a proxy
+
 ## How To Run
 You can run the application locally by running `npm start` but it won't fonction correctly (explanation below)
 
@@ -27,7 +29,7 @@ To run the unit and integration test suits use `npm test`
 
 ## Future improvements
 
-- biggest one is implementing advanced search features (filter by programming language, stars, forks etc), the mechanisme for constructing these queries are implemented but didn't get to implement their UI
+- biggest one is implementing advanced search features (filter by programming language, stars, forks etc), the mechanisme for constructing these queries are implemented but i didn't get to implement their UI
 - making it so that you can run storybook with one command, it might be a webpack thing or maybe versions are missmached but to figure it out i need time
 - spend more time on making sure errors are handled properly
 - expand repository from list to view more information
