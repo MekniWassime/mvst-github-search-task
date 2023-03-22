@@ -8,6 +8,7 @@ The app is deployed here [https://mvst-repository-search-task.onrender.com](http
 - Storybooks that range from simple to ones that run component tests
 - Unit and integration tests some of which mock various aspects of the application
 - Documented my code in hopes of improving your inspection experience
+- TailwindCss for styles and dark theme toggle implementation
 
 (PS: i m going to send this as a zip file but if you would like to view it on github send me an email on mekni.wassime@gmail.com and i will invite you to the private repo)
 
