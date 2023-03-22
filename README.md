@@ -15,6 +15,8 @@ The app is deployed here [https://mvst-repository-search-task.onrender.com](http
 Also if the app takes a long time to login that's because it goes through a proxy server hosted for free that gets shutdown for inactivity, please hang tight as it will automatically start but it might take about 30 seconds, only login goes through a proxy
 
 ## How To Run
+Don't forget to run `npm install`
+
 You can run the application locally by running `npm start` but it won't fonction correctly (explanation below)
 
 To check the app in action visit this link [https://mvst-repository-search-task.onrender.com](https://mvst-repository-search-task.onrender.com)
