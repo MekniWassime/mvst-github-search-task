@@ -1,4 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+
+//For now this contains only the dark mode theme information
+//but it is intened to hold and settings like language etc
+
 interface AppSettingsState {
     darkMode: boolean;
 }

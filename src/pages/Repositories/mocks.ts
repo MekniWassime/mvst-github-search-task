@@ -1,7 +1,10 @@
 import { MockedResponse } from "@apollo/react-testing";
 import { searchRepoByUser } from "../../services/RepositoryService";
 import { getUserInfoQuery } from "../../services/UserService";
-
+/**
+ * Mocked Graphql api data used for testing
+ * 3 requests in total are mocked
+ */
 export const mockedApolloClientResponses: MockedResponse[] = [
     {
         request: {

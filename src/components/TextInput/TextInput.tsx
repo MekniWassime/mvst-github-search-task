@@ -7,7 +7,14 @@ interface TextInputProps {
     submit: () => void,
     label?: string
 }
-
+/**
+ * A text input that automatically submits once the user stops typing
+ * 
+ * This field is controlled by React hook form and should be placed inside a `FormProvider` to work
+ * @param name name of the input also used by react hook form as the name of the value this input holds
+ * @param label the label or placeholder text displayed inside the input
+ * @param submit the function that the input needs to call to trigger a submit
+ */
 function TextInput({ name, submit, label }: TextInputProps) {
     const { field } = useController({ name: name, defaultValue: "" })
     const triggerSubmit = useTriggerSubmitAfterDelay(submit)

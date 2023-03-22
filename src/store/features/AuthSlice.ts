@@ -2,6 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAccessToken, fetchCurrentLogin } from '../../services/AuthService';
 
+//Allows our UI to react to auth changes throught the entire application
+
 interface AuthState {
     login: string | null
     accessToken: string | null,

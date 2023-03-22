@@ -8,7 +8,7 @@ interface RepositoryLoadingPlaceholderProps {
  * @param itemCount the number of placeholder items to show 
  */
 function RepositoryLoadingPlaceholder({ itemCount = 10 }: RepositoryLoadingPlaceholderProps) {
-
+  //uses index as a key but in this case it is fine to use index since all the elements are visually equivalent
   const renderItems = () => {
     const items = []
     for (let i = 0; i < itemCount; i++) {

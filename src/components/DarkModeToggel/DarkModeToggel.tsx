@@ -2,7 +2,11 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { toggleDarkMode } from '../../store/features/AppSettingsSlice';
-
+/**
+ * A simple dark theme toggle button that could be dropped anywhere
+ * 
+ * Interacts with App settings redux store
+ */
 function DarkModeToggel() {
 
     const isDarkModeEnabled = useSelector((state: RootState) => state.appSettings.darkMode);

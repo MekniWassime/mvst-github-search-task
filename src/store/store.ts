@@ -25,7 +25,7 @@ const appSettingsPersistConfig = {
     version: 1,
     storage,
 }
-
+//The auth and appsettings stores are persisted on the client's machine
 const authPersistedReducer = persistReducer(authPersistConfig, AuthSlice.reducer);
 const appSettingsPersistedReducer = persistReducer(appSettingsPersistConfig, AppSettingsSlice.reducer);
 

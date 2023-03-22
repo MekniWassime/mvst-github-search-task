@@ -8,22 +8,30 @@ import UserInfoItem from '../../components/UserInfoItem';
 import { useUserInfo } from '../../services/UserService';
 import { useSearchRepoByUser } from '../../services/RepositoryService';
 import RepositoryLoadingPlaceholder from '../../components/RepositoryLoadingPlaceholder';
-
+/**
+ * This page allows the user to query their or other user's github repositories
+ * 
+ * you can also copy the url link containing your user name and share it with others
+ */
 function Repositories() {
-    const user = useEnforceUrlParams()
-    const userInfo = useUserInfo(user);
+    //react hook form hooks
     const methods = useForm();
     const { watch } = methods;
+    //reads the user name from the url path and adds it if it's not there
+    const user = useEnforceUrlParams()
+    //asyncronously fetches user profile info to display alongside their repositories
+    const userInfo = useUserInfo(user);
+    //The query that is sent to the graphql api, it contains the search term, user and many other filters
     const [query, setQuery] = useState(`user:${user}`);
-
+    /** when called it builds the query string and updates its state*/
     const submit = () => {
         const newQuery = buildQueryString(
             watch('searchString'), user, undefined, undefined);
         setQuery(newQuery);
     }
-
+    //this hook is triggered when the query is changed (aka submit is called)
     const { data, loading } = useSearchRepoByUser(query);
-
+    /**repository list possible states are loading, noData and hasData */
     const renderRepositoryList = () => {
         if (loading)
             return RepositoryLoadingPlaceholder({ itemCount: 7 });
