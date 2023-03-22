@@ -17,7 +17,7 @@ interface TextInputProps {
  */
 function TextInput({ name, submit, label }: TextInputProps) {
     const { field } = useController({ name: name, defaultValue: "" })
-    const triggerSubmit = useTriggerSubmitAfterDelay(submit)
+    const triggerSubmit = useTriggerSubmitAfterDelay({ submit: submit })
 
     return (
         <>

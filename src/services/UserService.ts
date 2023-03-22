@@ -1,3 +1,4 @@
+import { apolloClient } from './Apollo/apolloClient';
 import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
@@ -41,11 +42,10 @@ export const useUserInfo = (username: string): UserInfo | null => {
 /**Query that allows us to search for users by their login*/
 export const searchForUserQuery = gql`
 query searchForUser($queryString: String!) { 
-    search (type: USER, query: $queryString, first:2) {
+    search (type: USER, query: $queryString, first:5) {
       edges {
         node {
           ... on User {
-            name
             login
           }
         }
@@ -54,3 +54,11 @@ query searchForUser($queryString: String!) {
   }
 `
 
+export const searchForUser = async (query: string): Promise<string[]> => {
+  if (query === "") return []
+  const result = await apolloClient.query({ query: searchForUserQuery, variables: { queryString: query } })
+  const edges = (result.data.search.edges as any[])
+  //weirdly enough if you type hello as a query the first node will be completely empty and i don't know why
+  //this behaviour is consistant in Github's Graphiql Explorer
+  return edges.map(({ node }) => node.login).filter((user) => user !== undefined)
+}

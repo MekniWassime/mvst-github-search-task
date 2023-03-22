@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useEnforceUrlParams } from './hooks';
 import TextInput from '../../components/TextInput';
 import { buildQueryString } from './utility';
 import RepositoryItem from '../../components/RepositoryItem';
 import UserInfoItem from '../../components/UserInfoItem';
-import { useUserInfo } from '../../services/UserService';
+import { searchForUser, useUserInfo } from '../../services/UserService';
 import { useSearchRepoByUser } from '../../services/RepositoryService';
 import RepositoryLoadingPlaceholder from '../../components/RepositoryLoadingPlaceholder';
+import AutoCompleteInput from '../../components/AutoCompleteInput/AutoCompleteInput';
+import { useNavigate } from 'react-router-dom';
 /**
  * This page allows the user to query their or other user's github repositories
  * 
@@ -17,6 +19,7 @@ function Repositories() {
     //react hook form hooks
     const methods = useForm();
     const { watch } = methods;
+    const userSearchMethods = useForm();
     //reads the user name from the url path and adds it if it's not there
     const user = useEnforceUrlParams()
     //asyncronously fetches user profile info to display alongside their repositories
@@ -41,10 +44,20 @@ function Repositories() {
             return data.map((repository) => (<RepositoryItem key={repository.id} repository={repository} />))
     }
 
+    const handleUserSearch = (username: string) => {
+        if (username !== undefined && username !== user) {
+            window.location.pathname = `/repos/${username}`
+        }
+    }
+
+
     return (
         <div className='flex flex-col md:flex-row'>
             <div className='px-6 py-3 md:pt-10 flex-none shadow-md md:min-h-screen'>
                 <UserInfoItem user={userInfo} />
+                <FormProvider {...userSearchMethods}>
+                    <AutoCompleteInput name='user' label="Search for users" getSuggestions={searchForUser} submit={handleUserSearch} delay={100} />
+                </FormProvider>
             </div>
             <div className='flex-grow p-6 md:pl-8 md:pt-7'>
                 <FormProvider {...methods}>
