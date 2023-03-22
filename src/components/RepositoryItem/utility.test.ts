@@ -1,6 +1,6 @@
 import { humanReadableDuration } from './utility';
 
-describe('Testing humanReadableDuration function', () => {
+describe('Testing humanReadableDuration utility function', () => {
     jest.useFakeTimers()
     const now = new Date("2023-03-21 12:00");
     jest.setSystemTime(now);

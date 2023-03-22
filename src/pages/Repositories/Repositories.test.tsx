@@ -5,6 +5,7 @@ import { MockedProvider } from '@apollo/react-testing'
 import Repositories from './Repositories';
 import { userEvent } from '@storybook/testing-library';
 import { mockedApolloClientResponses } from './mocks';
+import React from 'react';
 
 jest.mock('react-redux')
 

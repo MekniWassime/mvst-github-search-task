@@ -5,11 +5,9 @@ import { expect } from '@storybook/jest'
 import TextInput from './TextInput';
 import { FormProvider, useForm } from 'react-hook-form';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
     title: 'Components/TextInput',
     component: TextInput,
-    // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     argTypes: {
         submit: { action: "submit" }
     },
@@ -25,7 +23,6 @@ export default {
     ]
 } as ComponentMeta<typeof TextInput>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof TextInput> = (args) => <TextInput {...args} />;
 
 export const Primary = Template.bind({});

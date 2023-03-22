@@ -2,6 +2,10 @@ import React from 'react'
 interface StarIconProps {
     isStarred: boolean
 }
+/**
+ * A simple star icon that show's if a repository is starred by this user or no
+ * @param isStarred wheather or not the repository is starred
+ */
 const StarIcon = ({ isStarred }: StarIconProps) => {
     if (isStarred)
         return (

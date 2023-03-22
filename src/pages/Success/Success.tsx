@@ -15,11 +15,13 @@ import { AppDispatch, RootState } from '../../store';
  */
 
 function Success() {
+    //we need this to read the code parameter delivered by github redirect to our site
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch<AppDispatch>();
+    //we need the auth state to know if a request is already in progress or no
     const authState = useSelector((state: RootState) => state.auth);
     const navigate = useNavigate();
-
+    //onComponentMount
     useEffect(() => {
         const code = searchParams.get("code");
         //if auth state is failed or idle we try to fetch a new accessToken
@@ -27,11 +29,11 @@ function Success() {
             dispatch(getAccessToken(code));
         }
     }, [])
-
+    //automatically redirect based on the updated authentication state of the user
     useEffect(() => {
         const state = authState.state;
         if (state === "succeeded")
-            return navigate("/");
+            return navigate(`/repos/${authState.login}`);
         if (state === "failed")
             return navigate("/login");
     }, [authState])

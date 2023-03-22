@@ -2,18 +2,14 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import UserInfoItem from './UserInfoItem';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
     title: 'Components/UserInfoItem',
     component: UserInfoItem,
-    // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     argTypes: {
         backgroundColor: { control: 'color' },
     },
 } as ComponentMeta<typeof UserInfoItem>;
 
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof UserInfoItem> = (args) => <UserInfoItem {...args} />;
 
 //Standard look

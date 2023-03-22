@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client"
-
+/**query used to fetch repositories from the graphql api*/
 export const searchRepoByUser = gql`
 query searchRepoByUser($queryString: String!) { 
     search (type: REPOSITORY, query: $queryString, first:100) {
@@ -22,7 +22,7 @@ query searchRepoByUser($queryString: String!) {
     }
   }
 `
-
+/**An interface that the data from the api is parsed to */
 export interface RepositoryInfo {
   id: string,
   name: string,
@@ -32,7 +32,11 @@ export interface RepositoryInfo {
   isStarred: boolean,
   stars: number
 }
-
+/**
+ * A hook that queries the graphql api and parses the data into a friendly format usuable by our application
+ * @param queryString string that is going to get passed to the graphql query
+ * @returns a list of repositories that match the search query and the loading state
+ */
 export const useSearchRepoByUser = (queryString: string): { data: RepositoryInfo[], loading: boolean } => {
   const { data, loading } = useQuery(searchRepoByUser, { variables: { queryString } })
   if (data === undefined) return { data: [], loading }

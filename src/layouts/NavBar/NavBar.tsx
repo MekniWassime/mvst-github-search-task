@@ -6,6 +6,9 @@ import Spinner from '../../components/Spinner'
 import { RootState } from '../../store'
 import { logout } from '../../store/features/AuthSlice'
 
+/**
+ * A navbar that contains the theme toggle button and the logout/login buttons
+ */
 function NavBar() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -17,7 +20,9 @@ function NavBar() {
     const onLoginClick = () => {
         navigate("/login")
     }
-
+    /**
+     * The navbar needs to represent the up to date auth state, the three possible states are loggedIn, loggedOut, Pending
+     */
     const renderAuthButtons = () => {
         if (state === "succeeded")
             return (<button onClick={() => onLogoutClick()} className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 hover:bg-transparent border-0 hover:text-red-500 p-0 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:hover:bg-transparent">Logout</button>);

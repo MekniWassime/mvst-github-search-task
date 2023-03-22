@@ -1,5 +1,7 @@
 import React from 'react'
-
+/**
+ * Spinner component used to show that async operations are in progress
+ */
 function Spinner() {
     return (
         <div role="status">

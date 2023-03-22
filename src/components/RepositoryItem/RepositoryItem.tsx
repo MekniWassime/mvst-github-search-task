@@ -6,9 +6,12 @@ import { humanReadableDuration } from './utility'
 interface RepositoryItemProps {
     repository: RepositoryInfo,
 }
-
+/**
+ * Repository item component used to render the fetched repository list
+ */
 function RepositoryItem({ repository: { name, pushedAt, primaryLanguage, isStarred, stars, url } }: RepositoryItemProps) {
 
+    /**Conditionally renders the primary language indicator as this value can be undefined*/
     const renderPrimaryLanguage = () => {
         if (primaryLanguage)
             return (<span className="inline-flex items-center bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">

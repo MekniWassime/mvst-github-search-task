@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
-
+/**
+ * Page not found error page
+ */
 function PageNotFound() {
   const navigate = useNavigate();
   return (
